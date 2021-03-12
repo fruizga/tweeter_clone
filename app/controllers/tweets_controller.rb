@@ -7,29 +7,46 @@ class TweetsController < ApplicationController
   end
 
   def show
+    
   end
 
   def new
-
+    @tweet = Tweet.new
   end
 
   def edit
   end
 
   def create
+    @tweet = Tweet.new(tweet_params)
+    
+    if @tweet.save
+      flash[:notice] = "Tweet was created successfully."
+      redirect_to tweets_path 
+    else
+      render 'new'
+    end
   end
 
   def update
-    @tweet = Tweet.new
+    if @atweet.update(tweet_params)
+      flash[:notice] = "Tweet was updated successfully."
+      redirect_to @tweet
+    else
+      render 'edit'
+    end
   end
 
   def destroy
+    @tweet = Tweet.find(params[:id])
+    @tweet.destroy
+    redirect_to atweets_path
   end
 
   private
     #
-    def set_article
-      @tweet = Twwet.find(params[:id])
+    def set_tweet
+      @tweet = Tweet.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
