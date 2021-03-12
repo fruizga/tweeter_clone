@@ -29,22 +29,22 @@ class TweetsController < ApplicationController
   end
 
   def update
-    if @atweet.update(tweet_params)
+    if @tweet.update(tweet_params)
       flash[:notice] = "Tweet was updated successfully."
-      redirect_to @tweet
+      redirect_to tweets_path
     else
       render 'edit'
     end
   end
 
   def destroy
-    @tweet = Tweet.find(params[:id])
+    
     @tweet.destroy
     redirect_to atweets_path
   end
 
   private
-    #
+    
     def set_tweet
       @tweet = Tweet.find(params[:id])
     end
